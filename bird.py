@@ -4,9 +4,16 @@ from pygame.locals import *
 def rys_podlog():
     screen.blit(podloga, (podloga_x_pos, 900))
     screen.blit(podloga, (podloga_x_pos + 500, 900))
+
+
 pygame.init()
 screen = pygame.display.set_mode((500,1000))
 clock = pygame.time.Clock()
+
+# Zmienne
+grav = 0.2
+wsb_movement = 0
+
 
 tlo = pygame.image.load('').convert()
 tlo = pygame.transform.scale2x(tlo)
@@ -24,8 +31,15 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                wsb_movement = 0
+                wsb_movement -= 10
 
     screen.blit(tlo, (0, 0))
+
+    wsb_movement += grav
+    wsb_rect.centery += wsb_movement
     screen.blit(wsb_bird, wsb_rect)
     podloga_x_pos += 1
     rys_podlog()
