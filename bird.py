@@ -8,7 +8,7 @@ def rys_podlog():
 
 
 def stw_pipe():
-    new_pipe = pipe.get_rect(midtop = (250, 500))
+    new_pipe = pipe.get_rect(midtop = (750, 500))
     return new_pipe
 
 
