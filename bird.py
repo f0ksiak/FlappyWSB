@@ -15,7 +15,7 @@ grav = 0.2
 wsb_movement = 0
 
 
-tlo = pygame.image.load('./assets/backgroundwsb.jpg').convert()
+tlo = pygame.image.load('./assets/wsbbg.png').convert()
 
 
 podloga = pygame.image.load('./assets/floor.png').convert_alpha()
