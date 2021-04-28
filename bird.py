@@ -15,15 +15,15 @@ grav = 0.2
 wsb_movement = 0
 
 
-tlo = pygame.image.load('').convert()
-tlo = pygame.transform.scale2x(tlo)
+tlo = pygame.image.load('./assets/backgroundwsb.jpg').convert()
 
-podloga = pygame.image.load('').convert()
+
+podloga = pygame.image.load('./assets/floor.png').convert_alpha()
 podloga = pygame.transform.scale2x(podloga)
 podloga_x_pos = 0
 
-wsb_bird = pygame.image.load('/assets/wsb.png').convert()
-wsb_bird = pygame.transform.scale2x(wsb_bird)
+wsb_bird = pygame.image.load('./assets/wsb.png').convert_alpha()
+
 wsb_rect = wsb_bird.get_rect(center = (100, 500))
 
 while True:
