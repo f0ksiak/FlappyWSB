@@ -30,6 +30,7 @@ def rys_pipe(pipes):
 def spr_coll(pipes):
     for r in pipes:
         if wsb_rect.colliderect(r):
+            game_over_sound.play()
             return False
 
     if wsb_rect.top <= -100 or wsb_rect.bottom >= 900:
@@ -49,8 +50,11 @@ def wynik_display(game_state):
         naj_wyn = gra_cz.render(f'High Score: {int(naj_wynik)}', True, (255, 255, 255))
         naj_wynik_rect = naj_wyn.get_rect(center=(250, 850))
         screen.blit(naj_wyn, naj_wynik_rect)
-            
 
+def akt_wynik(wynik, naj_wynik):
+    if wynik > naj_wynik:
+        naj_wynik = wynik
+    return naj_wynik
 
 
 
@@ -84,6 +88,17 @@ GENPIPE = pygame.USEREVENT
 pygame.time.set_timer(GENPIPE,1200)
 pipe_wys = [400, 500, 600, 700]
 
+#Game over
+game_over = pygame.image.load('assets/gameover.png').convert_alpha()
+game_over = pygame.transform.scale2x(game_over)
+game_over_rect = game_over.get_rect(center = (250,450))
+
+#Dźwięk
+skok_sound = pygame.mixer.Sound('sounds/bruh.mp3')
+game_over_sound = pygame.mixer.Sound('sounds/deathdiff.mp3')
+punkt_sound = pygame.mixer.Sound('sounds/point.wav')
+punkt_licz = 100
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -93,11 +108,13 @@ while True:
             if event.key == pygame.K_SPACE and gra_act:
                 wsb_movement = 0
                 wsb_movement -= 10
+                skok_sound.play()
             if event.key == pygame.K_SPACE and gra_act == False:
                 gra_act = True
                 pipe_list.clear()
                 wsb_rect.center = (100,500)
                 wsb_movement = 0
+                wynik = 0
         if event.type == GENPIPE:
             pipe_list.extend(stw_pipe())
 
@@ -116,7 +133,13 @@ while True:
         #Wynik
         wynik += 0.01
         wynik_display('main_game')
+        punkt_licz -= 1
+        #if punkt_licz <= 0:
+            #punkt_sound.play()
+            #punkt_licz = 100
     else:
+        screen.blit(game_over, game_over_rect)
+        naj_wynik = akt_wynik(wynik, naj_wynik)
         wynik_display('game_over')
 
 
