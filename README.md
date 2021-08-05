@@ -1,2 +1,1 @@
-# PythonProject
-Python Project for class
+# FlappyWSB
